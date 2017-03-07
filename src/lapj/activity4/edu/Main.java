@@ -13,7 +13,9 @@ public class Main {
     public static void main(String[] args) throws Exception {
 
         firstExercise();
+        System.out.println("----------------------------");
         secondExercise();
+        System.out.println("----------------------------");
         thirdExercise();
     }
 

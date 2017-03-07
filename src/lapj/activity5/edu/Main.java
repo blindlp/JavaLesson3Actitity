@@ -1,6 +1,9 @@
 package lapj.activity5.edu;
+import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
+
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Created by luispo on 3/6/17.
@@ -9,11 +12,11 @@ import java.util.ArrayList;
 
 public class Main {
         public static void main(String[] args) throws Exception {
-            ;
 
-            String mainDishesFileTXT = "/Users/luispo/IdeaProjects/Lesson3/src/lapj/activity5/edu/main_dish.txt";
-            String drinksFileTXT = "/Users/luispo/IdeaProjects/Lesson3/src/lapj/activity5/edu/drinks.txt";
-            String dessertsFileTXT = "/Users/luispo/IdeaProjects/Lesson3/src/lapj/activity5/edu/dessert.txt";
+
+            String mainDishesFileTXT = "C:\\Users\\luispo\\IdeaProjects\\JavaLesson3Actitity\\src\\lapj\\activity5\\edu\\main_dish.txt";
+            String drinksFileTXT = "C:\\Users\\luispo\\IdeaProjects\\JavaLesson3Actitity\\src\\lapj\\activity5\\edu\\drinks.txt";
+            String dessertsFileTXT = "C:\\Users\\luispo\\IdeaProjects\\JavaLesson3Actitity\\src\\lapj\\activity5\\edu\\dessert.txt";
 
             PrintMainDish printMainDish = new PrintMainDish();
             printMainDish.printMainDish(mainDishesFileTXT);
@@ -24,11 +27,14 @@ public class Main {
             PrintDesserts printDesserts =  new PrintDesserts();
             printDesserts.printDesserts(dessertsFileTXT);
 
+            PrintCombos printCombos = new PrintCombos();
+            printCombos.printCombo(mainDishesFileTXT,drinksFileTXT,dessertsFileTXT);
 
 
 
         }
-    }
+}
+
 
 
 
@@ -132,6 +138,9 @@ public class Main {
     class Combo {
         //Combine Main Dish, Drink, Dessert
 
+
+        private static int MAX_DISCOUNT = 5;
+
         private MainDish mainDish;
         private Drink drink;
         private Dessert dessert;
@@ -149,19 +158,37 @@ public class Main {
             ;
         }
 
+        public double getComboPrice() {
+            return ComboPrice;
+        }
+
         private double calculateComboPrice(){
             return (this.mainDish.getPrice() +
                     this.drink.getPrice() +
-                    this.dessert.getPrice()) -
-                    calculateComboDiscount();
+                    this.dessert.getPrice()) - calculateComboDiscount();
+        }
+
+        public MainDish getMainDish() {
+            return mainDish;
+        }
+
+        public Drink getDrink() {
+            return drink;
+        }
+
+        public Dessert getDessert() {
+            return dessert;
         }
 
         private double calculateComboDiscount(){
-            return 0.00;
+            return (int)Math.random()*MAX_DISCOUNT;
         }
 
         public String toString(){
-            return "";
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append("\n\t\t" + getMainDish().getName() + " ," + getDrink().getName() + " , " + getDessert().getName());
+            stringBuilder.append("\n\t\t\t" + getComboPrice());
+            return stringBuilder.toString();
         };
 
 }
